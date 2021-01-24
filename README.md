@@ -23,7 +23,8 @@ In order to run this container you'll need docker installed.
 Start service initially
 
 ```shell
- docker run --mount type=bind,source="$(pwd)"/test,target=/user/src/app/mntdir --name=purencool_httpd -d  -t purencool_httpd:latest 
+
+ docker run  -p 80:8080 --mount type=bind,source="$(pwd)"/test/web,target=/var/www/html --name=purencool_httpd
 ```
 
 Stop service 
@@ -114,11 +115,9 @@ docker rmi -f purencool_httpd
 To rebuild and test purencool_httpd locally
 
 ```
-docker build -t "purencool_httpd:latest" . && \
-docker images && \
-docker run  -p 80:8080 --mount type=bind,source="$(pwd)"/test,target=/user/src/app/mntdir --name=purencool_httpd -d  -t purencool_httpd:latest  && \
+docker build -t "purencool_httpd:latest" . && docker images && \ 
+docker run  -p 80:8080 --mount type=bind,source="$(pwd)"/test/web,target=/var/www/html --name=purencool_httpd -d  -t purencool_httpd:latest  && \
 docker exec -it purencool_httpd  /bin/sh
-
 ```
 
 
